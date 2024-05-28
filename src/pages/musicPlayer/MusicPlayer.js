@@ -18,17 +18,17 @@ const MusicPlayer = () => {
     <div className='music-player'>
       <h1 className='title'>Modern Music Player</h1>
       <ul className='playlist'>
-        {
-          playlist.map((song, index) => {
+        {playlist.map((song, index) => {
+          return(
             <li
-              key={index}
-              className='playlist-item'
-              onClick={() => playSong(song)}
-            >
-              {song.name}
-            </li>
-          })
-        }
+            key={index}
+            className='playlist-item'
+            onClick={() => playSong(song)}
+          >
+            {song.name}
+          </li>
+          )
+        })}
       </ul>
       {currentSong && (
         <audio controls autoPlay className='audio'>
