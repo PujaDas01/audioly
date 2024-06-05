@@ -1,41 +1,64 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import './music-player.css';
+import AudioPlayer from 'react-h5-audio-player';
+import 'react-h5-audio-player/lib/styles.css';
 
 const MusicPlayer = () => {
-
   const [playlist, setPlaylist] = useState([
-    {name: 'Song 1', url: './audio/song1.mp3'},
-    {name: 'Song 2', url: './audio/song2.mp3'},
-    {name: 'Song 3', url: './audio/song3.mp3'},
-  ]); 
-  const [currentSong, setCurrentSong] = useState(null);
+    { name: 'Perfect', artist: 'Ed Sheeran', url: './audio/Ed Sheeran - Perfect.mp3' },
+    { name: 'Photograph', artist: 'Ed Sheeran', url: './audio/Ed Sheeran - Photograph.mp3' },
+    { name: 'Thinking out Loud', artist: 'Ed Sheeran', url: './audio/Ed Sheeran - Thinking out Loud.mp3' },
+    { name: 'Unstoppable', artist: 'Sia', url: './audio/Sia - Unstoppable.mp3' },
+    { name: 'Unstoppable', artist: 'Sia', url: './audio/Sia - Unstoppable.mp3' },
+    { name: 'Unstoppable', artist: 'Sia', url: './audio/Sia - Unstoppable.mp3' },
+    { name: 'Unstoppable', artist: 'Sia', url: './audio/Sia - Unstoppable.mp3' },
+  ]);
 
-  const playSong = (song) => {
-    setCurrentSong(song.url);
-  }
+  const [currentSongIndex, setCurrentSongIndex] = useState(0);
+  const audioRef = useRef(null);
+
+  const handleClickNext = () => {
+    setCurrentSongIndex((prevIndex) => (prevIndex + 1) % playlist.length);
+  };
+
+  const handleClickPrevious = () => {
+    setCurrentSongIndex((prevIndex) =>
+      prevIndex === 0 ? playlist.length - 1 : prevIndex - 1
+    );
+  };
+
+  const handleSongClick = (index) => {
+    setCurrentSongIndex(index);
+  };
 
   return (
     <div className='music-player'>
-      <h1 className='title'>Modern Music Player</h1>
+      <h1 className='title'>Audioly</h1>
       <ul className='playlist'>
-        {playlist.map((song, index) => {
-          return(
-            <li
+        {playlist.map((song, index) => (
+          <li
             key={index}
-            className='playlist-item'
-            onClick={() => playSong(song)}
+            className={`playlist-item ${index === currentSongIndex ? 'active' : ''}`}
+            onClick={() => handleSongClick(index)}
           >
-            {song.name}
+            <div>
+              <p className="song-name">{song.name}</p>
+              <p className="artist-name">{song.artist}</p>
+            </div>
           </li>
-          )
-        })}
+        ))}
       </ul>
-      {currentSong && (
-        <audio controls autoPlay className='audio'>
-          <source src={currentSong} type='audio/mp3' />
-          Your browser does not support the audio element.
-        </audio>
-      )}
+      <AudioPlayer
+        className='custom-audio-player'
+        ref={audioRef}
+        autoPlay
+        src={playlist[currentSongIndex].url}
+        onEnded={handleClickNext}
+        showSkipControls={true}
+        showJumpControls={false}
+        onClickNext={handleClickNext}
+        onClickPrevious={handleClickPrevious}
+      />
     </div>
   );
 };

@@ -1,36 +1,113 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #eceff1;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100svh;
+}
+
 .music-player {
     max-width: 600px;
-    margin: 0 auto;
-    background: #f9f9f9;
+    width: 100%;
+    background: #ffffff;
     padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     text-align: center;
-    font-family: Arial, sans-serif;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 .title {
-    font-size: 24px;
+    font-size: 28px;
+    color: #333;
     margin-bottom: 20px;
+    font-weight: 600;
 }
 
 .playlist {
     list-style: none;
     padding: 0;
     margin: 0;
+    max-height: 300px;  
+    overflow-y: auto;  
+    border-top: 1px solid #eee;
+    border-bottom: 1px solid #eee;
+}
+
+.playlist::-webkit-scrollbar {
+    width: 5px;
+}
+
+.playlist::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+.playlist::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 5px;
 }
 
 .playlist-item {
     cursor: pointer;
-    padding: 10px 0;
-    border-bottom: 1px solid #ddd;
+    border-bottom: 1px solid #eee;
+    transition: background-color 0.3s;
+    padding-bottom: 4px;
 }
 
 .playlist-item:hover {
-    background-color: #f1f1f1;
+    background-color: #f5f5f5;
 }
-  
-.audio {
-    width: 100%;
+
+.playlist-item.active {
+    background-color: #ffd54f;
+}
+
+.playlist-item div {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    padding-left: 10px;
+}
+
+.playlist-item .song-name {
+    font-size: 16px;
+    color: #333;
+    margin-bottom: -10px;
+}
+
+.playlist-item .artist-name {
+    font-size: 12px;
+    color: #666;
+}
+
+.custom-audio-player .rhap_container {
+    background: none;
+    box-shadow: none;
+    padding: 0;
     margin-top: 20px;
+}
+
+.custom-audio-player .rhap_time {
+    color: #ffd54f;
+    font-size: 12px;
+}
+
+.custom-audio-player .rhap_main-controls-button {
+    color: #ffd54f;
+}
+
+@media (max-width: 768px) {
+    body {
+        justify-content: flex-start;
+        overflow: hidden;
+    }
+    
+    .music-player {
+        border-radius: 0;
+        box-shadow: none;
+        margin: 20px 0;
+    }
 }
