@@ -102,7 +102,18 @@ body {
 
 .playlist-title {
     margin-bottom: 10px;
+    font-size: 12px;
+    text-align: left;
+    margin-left: 10px;
+    color: #868686;
 }
+
+.no-results {
+    text-align: center;
+    margin: 20px 0;
+    font-size: 1.2em;
+    color: #888;
+  }  
 
 .playlist {
     list-style: none;
