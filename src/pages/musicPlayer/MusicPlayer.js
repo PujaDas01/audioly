@@ -54,6 +54,8 @@ const MusicPlayer = () => {
   const [prevShowFavorites, setPrevShowFavorites] = useState(false);
   const audioRef = useRef(null);
   const searchInputRef = useRef(null);
+  const [playedFromAllSongs, setPlayedFromAllSongs] = useState(false);
+  const [userInteractedWithFavorites, setUserInteractedWithFavorites] = useState(false);
 
   useEffect(() => {
     if (audioRef.current && !isPlaying) {
@@ -76,7 +78,7 @@ const MusicPlayer = () => {
       const nextSongIndex = playlist.findIndex(song => song.id === nextFavoriteId);
       setCurrentSongIndex(nextSongIndex);
     } else {
-      setCurrentSongIndex(prevIndex => (prevIndex + 1) % displayedPlaylist.length);
+      setCurrentSongIndex(prevIndex => (prevIndex + 1) % playlist.length);
     }
     setIsPlaying(true);
   };
@@ -90,17 +92,16 @@ const MusicPlayer = () => {
       const prevSongIndex = playlist.findIndex(song => song.id === prevFavoriteId);
       setCurrentSongIndex(prevSongIndex);
     } else {
-      setCurrentSongIndex(prevIndex =>
-        prevIndex === 0 ? displayedPlaylist.length - 1 : prevIndex - 1
-      );
+      setCurrentSongIndex(prevIndex => (prevIndex - 1 + playlist.length) % playlist.length);
     }
     setIsPlaying(true);
-  };  
+  };
 
   const handleSongClick = (index) => {
     const actualIndex = playlist.findIndex(song => song.id === displayedPlaylist[index].id);
     setCurrentSongIndex(actualIndex);
     setIsPlaying(true);
+    setPlayedFromAllSongs(false);
     if (audioRef.current) {
       audioRef.current.audio.current.play().catch(error => {
         console.error('Failed to play the audio:', error);
@@ -211,18 +212,20 @@ const MusicPlayer = () => {
           ))}
         </ul>
       )}
-      <AudioPlayer
-        ref={audioRef}
-        className='custom-audio-player'
-        src={playlist[currentSongIndex]?.url}
-        onPlay={() => setIsPlaying(true)}
-        onPause={() => setIsPlaying(false)}
-        onEnded={handleClickNext}
-        onClickNext={handleClickNext}
-        onClickPrevious={handleClickPrevious}
-        showSkipControls
-        showJumpControls={false}
-      />
+      {displayedPlaylist.length > 0 && (
+        <AudioPlayer
+          ref={audioRef}
+          className='custom-audio-player'
+          src={playlist[currentSongIndex]?.url}
+          onPlay={()=> setIsPlaying(true)}
+          onPause={() => setIsPlaying(false)}
+          onEnded={handleClickNext}
+          onClickNext={handleClickNext}
+          onClickPrevious={handleClickPrevious}
+          showSkipControls
+          showJumpControls={false}
+        />
+      )}
     </div>
   );
 };
