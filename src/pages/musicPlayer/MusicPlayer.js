@@ -5,6 +5,7 @@ import 'react-h5-audio-player/lib/styles.css';
 import { FaSearch, FaArrowLeft, FaHeart, FaMusic } from 'react-icons/fa';
 
 const MusicPlayer = () => {
+  
   const initialPlaylist = [
     { id: 1, name: 'Love Me Like You Do', artist: 'Ellie Goulding', url: './audio/Ellie Goulding - Love Me Like You Do.mp3' },
     { id: 2, name: 'Without Me', artist: 'Halsey', url: './audio/Halsey - Without Me.mp3' },
@@ -50,13 +51,21 @@ const MusicPlayer = () => {
   const [isSearching, setIsSearching] = useState(false);
   const [favorites, setFavorites] = useState([]);
   const [showFavorites, setShowFavorites] = useState(false);
+  const [prevShowFavorites, setPrevShowFavorites] = useState(false);
   const audioRef = useRef(null);
+  const searchInputRef = useRef(null);
 
   useEffect(() => {
     if (audioRef.current && !isPlaying) {
       audioRef.current.audio.current.pause();
     }
   }, [currentSongIndex, isPlaying]);
+
+  useEffect(() => {
+    if (isSearching && searchInputRef.current) {
+      searchInputRef.current.focus();
+    }
+  }, [isSearching]);
 
   const handleClickNext = () => {
     let nextIndex;
@@ -97,9 +106,13 @@ const MusicPlayer = () => {
         console.error('Failed to play the audio:', error);
       });
     }
+    setIsSearching(false);
   };
 
   const handleSearchClick = () => {
+    if (!isSearching) {
+      setPrevShowFavorites(showFavorites);
+    }
     setIsSearching(!isSearching);
     setSearchQuery('');
   };
@@ -121,10 +134,15 @@ const MusicPlayer = () => {
     song.artist.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
-  const displayedPlaylist = showFavorites
-    ? playlist.filter(song => favorites.includes(song.id))
-    : isSearching
-      ? filteredPlaylist
+  const displayedPlaylist = isSearching
+    ? prevShowFavorites
+      ? playlist.filter(song => favorites.includes(song.id)).filter(song =>
+          song.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+          song.artist.toLowerCase().includes(searchQuery.toLowerCase())
+        )
+      : filteredPlaylist
+    : showFavorites
+      ? playlist.filter(song => favorites.includes(song.id))
       : playlist;
 
   return (
@@ -144,24 +162,27 @@ const MusicPlayer = () => {
               placeholder='Search songs...'
               value={searchQuery}
               onChange={handleSearchChange}
+              ref={searchInputRef}
             />
           )}
         </div>
       </div>
-      <div className='playlist-title'>
-        <span
-          className={`tab ${!showFavorites ? 'active' : ''}`}
-          onClick={() => setShowFavorites(false)}
-        >
-          All Songs
-        </span>
-        <span
-          className={`tab ${showFavorites ? 'active' : ''}`}
-          onClick={() => setShowFavorites(true)}
-        >
-          Favorite Songs
-        </span>
-      </div>
+      {!isSearching && (
+        <div className='playlist-title'>
+          <span
+            className={`tab ${!showFavorites ? 'active' : ''}`}
+            onClick={() => setShowFavorites(false)}
+          >
+            All Songs
+          </span>
+          <span
+            className={`tab ${showFavorites ? 'active' : ''}`}
+            onClick={() => setShowFavorites(true)}
+          >
+            Favorite Songs
+          </span>
+        </div>
+      )}
       {displayedPlaylist.length === 0 ? (
         <div className='no-results'>
           <FaMusic className='music-icon' />
