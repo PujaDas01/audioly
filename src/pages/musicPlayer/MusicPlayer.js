@@ -59,16 +59,34 @@ const MusicPlayer = () => {
   }, [currentSongIndex, isPlaying]);
 
   const handleClickNext = () => {
-    setCurrentSongIndex((prevIndex) => (prevIndex + 1) % displayedPlaylist.length);
+    let nextIndex;
+    if (showFavorites) {
+      const favoriteIndex = favorites.indexOf(playlist[currentSongIndex].id);
+      nextIndex = (favoriteIndex + 1) % favorites.length;
+      const nextFavoriteId = favorites[nextIndex];
+      const nextSongIndex = playlist.findIndex(song => song.id === nextFavoriteId);
+      setCurrentSongIndex(nextSongIndex);
+    } else {
+      setCurrentSongIndex(prevIndex => (prevIndex + 1) % displayedPlaylist.length);
+    }
     setIsPlaying(true);
   };
-
+  
   const handleClickPrevious = () => {
-    setCurrentSongIndex((prevIndex) =>
-      prevIndex === 0 ? displayedPlaylist.length - 1 : prevIndex - 1
-    );
+    let prevIndex;
+    if (showFavorites) {
+      const favoriteIndex = favorites.indexOf(playlist[currentSongIndex].id);
+      prevIndex = (favoriteIndex - 1 + favorites.length) % favorites.length;
+      const prevFavoriteId = favorites[prevIndex];
+      const prevSongIndex = playlist.findIndex(song => song.id === prevFavoriteId);
+      setCurrentSongIndex(prevSongIndex);
+    } else {
+      setCurrentSongIndex(prevIndex =>
+        prevIndex === 0 ? displayedPlaylist.length - 1 : prevIndex - 1
+      );
+    }
     setIsPlaying(true);
-  };
+  };  
 
   const handleSongClick = (index) => {
     const actualIndex = playlist.findIndex(song => song.id === displayedPlaylist[index].id);
@@ -178,6 +196,7 @@ const MusicPlayer = () => {
         src={playlist[currentSongIndex]?.url}
         onPlay={() => setIsPlaying(true)}
         onPause={() => setIsPlaying(false)}
+        onEnded={handleClickNext}
         onClickNext={handleClickNext}
         onClickPrevious={handleClickPrevious}
         showSkipControls
