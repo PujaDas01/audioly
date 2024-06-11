@@ -105,24 +105,38 @@ body {
 
 .playlist-title {
   display: flex;
-  justify-content: space-between;
-  margin-bottom: 10px;
-  font-size: 12px;
-  text-align: left;
-  color: #868686;
+  justify-content: flex-start;
 }
 
 .tab {
   padding: 10px 20px;
   cursor: pointer;
-  font-size: 16px;
-  color: #80cbc4;
-  border-bottom: 2px solid transparent;
-  transition: border-color 0.3s;
+  font-size: 14px;
+  color: #868686;
+  position: relative; 
+  transition: color 0.3s; 
+}
+
+.tab::after {
+  content: '';
+  display: block;
+  width: 0; 
+  height: 2px;
+  background-color: #80cbc4;
+  margin: 0 auto;
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  transition: width 0.3s;
 }
 
 .tab.active {
-  border-bottom: 2px solid #80cbc4;
+  color: #80cbc4;
+}
+
+.tab.active::after {
+  width: 50%;
 }
 
 .no-results {
@@ -197,7 +211,7 @@ body {
 .song-info {
   display: flex;
   flex-direction: column;
-  padding-left: 5px;
+  padding-left: 4px;
   text-align: left;
 }
 
@@ -218,9 +232,10 @@ body {
 
 .favorite-icon {
   margin-left: auto;
-  font-size: 18px;
+  font-size: 16px;
   color: #ccc;
   transition: color 0.3s;
+  padding-right: 4px;
 }
 
 .favorite-icon.favorite {
