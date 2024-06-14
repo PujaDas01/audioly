@@ -49,11 +49,18 @@ const MusicPlayer = () => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const [isSearching, setIsSearching] = useState(false);
-  const [favorites, setFavorites] = useState([]);
+  const [favorites, setFavorites] = useState(() => {
+    const storedFavorites = localStorage.getItem('favorites');
+    return storedFavorites ? JSON.parse(storedFavorites) : [];
+  });
   const [showFavorites, setShowFavorites] = useState(false);
   const audioRef = useRef(null);
   const searchInputRef = useRef(null);
   const [playedFromAllSongs, setPlayedFromAllSongs] = useState(true);
+
+  useEffect(() => {
+    localStorage.setItem('favorites', JSON.stringify(favorites));
+  }, [favorites]);
 
   useEffect(() => {
     if (audioRef.current && !isPlaying) {
