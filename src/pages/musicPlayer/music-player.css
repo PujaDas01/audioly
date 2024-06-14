@@ -18,7 +18,7 @@ body {
 
 .music-player {
   width: 550px;
-  height: 550px;
+  height: 600px;
   background: rgba(255, 255, 255, 0.2);
   backdrop-filter: blur(10px);
   padding: 20px;
@@ -128,7 +128,7 @@ body {
   left: 0;
   right: 0;
   bottom: 0;
-  transition: width 0.3s;
+  transition: all 0.3s;
 }
 
 .tab.active {
@@ -137,6 +137,24 @@ body {
 
 .tab.active::after {
   width: 50%;
+}
+
+.sliding-content {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  flex-grow: 1;
+}
+
+.sliding-content-inner {
+  display: flex;
+  transition: transform 0.3s ease-in-out;
+}
+
+.sliding-section {
+  min-width: 100%;
+  box-sizing: border-box;
+  flex-shrink: 0;
 }
 
 .no-results {
@@ -165,6 +183,7 @@ body {
   flex-grow: 1;
   border-top: 1px solid #eee;
   border-bottom: 1px solid #eee;
+  max-height: calc(100vh - 300px);
 }
 
 .playlist::-webkit-scrollbar {
