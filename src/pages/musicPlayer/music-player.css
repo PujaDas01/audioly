@@ -242,13 +242,6 @@ body {
   color: #ff4081;
 }
 
-.custom-audio-player .rhap_container {
-  background: none;
-  box-shadow: none;
-  padding: 0;
-  margin-top: 20px;
-}
-
 .custom-audio-player .rhap_time {
   color: #b2dfdb;
   font-size: 12px;
@@ -259,11 +252,12 @@ body {
 }
 
 .current-song {
-  background: linear-gradient(90deg, #b2dfdb, #80cbc4);
+  background-color: #fff;
+  box-shadow: 0 0 3px 0 rgba(0, 0, 0, 0.2);
 }
 
 .current-song-text {
-  color: white;
+  color: #b2dfdb;
   font-size: 12px;
   font-weight: bold;
 }
