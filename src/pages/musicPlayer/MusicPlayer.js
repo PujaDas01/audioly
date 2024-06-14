@@ -43,195 +43,206 @@ const MusicPlayer = () => {
     { id: 34, name: 'My Heart Will Go On', artist: 'Celine Dion', url: './audio/Celine Dion - My Heart Will Go On.mp3' },
     { id: 35, name: 'Who Am I to Stand in Your Way', artist: 'Chester See', url: './audio/Chester See - Who Am I to Stand in Your Way.mp3' },
   ];
-
-  const [playlist, setPlaylist] = useState(() => initialPlaylist.sort((a, b) => a.name.localeCompare(b.name)));
-  const [currentSongIndex, setCurrentSongIndex] = useState(0);
-  const [isPlaying, setIsPlaying] = useState(false);
-  const [searchQuery, setSearchQuery] = useState('');
-  const [isSearching, setIsSearching] = useState(false);
-  const [favorites, setFavorites] = useState(() => {
-    const storedFavorites = localStorage.getItem('favorites');
-    return storedFavorites ? JSON.parse(storedFavorites) : [];
-  });
-  const [showFavorites, setShowFavorites] = useState(false);
-  const audioRef = useRef(null);
-  const searchInputRef = useRef(null);
-  const [playedFromAllSongs, setPlayedFromAllSongs] = useState(true);
-
-  useEffect(() => {
-    localStorage.setItem('favorites', JSON.stringify(favorites));
-  }, [favorites]);
-
-  useEffect(() => {
-    if (audioRef.current && !isPlaying) {
-      audioRef.current.audio.current.pause();
-    }
-  }, [currentSongIndex, isPlaying]);
-
-  useEffect(() => {
-    if (isSearching && searchInputRef.current) {
-      searchInputRef.current.focus();
-    }
-  }, [isSearching]);
-
-  const handleClickNext = () => {
-    const currentPlaylist = playedFromAllSongs ? playlist : playlist.filter(song => favorites.includes(song.id));
-    if (currentPlaylist.length === 0) return;
-
-    if (playedFromAllSongs) {
-      setCurrentSongIndex(prevIndex => (prevIndex + 1) % playlist.length);
-    } else {
-      const currentIndexInFavorites = currentPlaylist.findIndex(song => song.id === playlist[currentSongIndex].id);
-      const nextIndexInFavorites = (currentIndexInFavorites + 1) % currentPlaylist.length;
-      const nextSongId = currentPlaylist[nextIndexInFavorites].id;
-      const nextSongIndex = playlist.findIndex(song => song.id === nextSongId);
-      setCurrentSongIndex(nextSongIndex);
-    }
-    setIsPlaying(true);
-  };
-
-  const handleClickPrevious = () => {
-    const currentPlaylist = playedFromAllSongs ? playlist : playlist.filter(song => favorites.includes(song.id));
-    if (currentPlaylist.length === 0) return;
-
-    if (playedFromAllSongs) {
-      setCurrentSongIndex(prevIndex => (prevIndex - 1 + playlist.length) % playlist.length);
-    } else {
-      const currentIndexInFavorites = currentPlaylist.findIndex(song => song.id === playlist[currentSongIndex].id);
-      const prevIndexInFavorites = (currentIndexInFavorites - 1 + currentPlaylist.length) % currentPlaylist.length;
-      const prevSongId = currentPlaylist[prevIndexInFavorites].id;
-      const prevSongIndex = playlist.findIndex(song => song.id === prevSongId);
-      setCurrentSongIndex(prevSongIndex);
-    }
-    setIsPlaying(true);
-  };
-
-  const handleSongClick = (index) => {
-    const actualIndex = playlist.findIndex(song => song.id === displayedPlaylist[index].id);
-    setCurrentSongIndex(actualIndex);
-    setIsPlaying(true);
-    setPlayedFromAllSongs(!showFavorites);
-    if (audioRef.current) {
-      audioRef.current.audio.current.play().catch(error => {
-        console.error('Failed to play the audio:', error);
-      });
-    }
-    setIsSearching(false);
-  };
-
-  const handleSearchClick = () => {
-    setIsSearching(!isSearching);
-    setSearchQuery('');
-  };
-
-  const handleSearchChange = (event) => {
-    setSearchQuery(event.target.value);
-  };
-
-  const handleFavoriteClick = (song) => {
-    setFavorites((prevFavorites) =>
-      prevFavorites.includes(song.id)
-        ? prevFavorites.filter((id) => id !== song.id)
-        : [...prevFavorites, song.id]
+  
+    const [playlist, setPlaylist] = useState(() => initialPlaylist.sort((a, b) => a.name.localeCompare(b.name)));
+    const [currentSongIndex, setCurrentSongIndex] = useState(0);
+    const [isPlaying, setIsPlaying] = useState(false);
+    const [searchQuery, setSearchQuery] = useState('');
+    const [isSearching, setIsSearching] = useState(false);
+    const [favorites, setFavorites] = useState(() => {
+      const storedFavorites = localStorage.getItem('favorites');
+      return storedFavorites ? JSON.parse(storedFavorites) : [];
+    });
+    const [showFavorites, setShowFavorites] = useState(false);
+    const audioRef = useRef(null);
+    const searchInputRef = useRef(null);
+    const [playedFromAllSongs, setPlayedFromAllSongs] = useState(true);
+  
+    useEffect(() => {
+      localStorage.setItem('favorites', JSON.stringify(favorites));
+    }, [favorites]);
+  
+    useEffect(() => {
+      if (audioRef.current && !isPlaying) {
+        audioRef.current.audio.current.pause();
+      }
+    }, [currentSongIndex, isPlaying]);
+  
+    useEffect(() => {
+      if (isSearching && searchInputRef.current) {
+        searchInputRef.current.focus();
+      }
+    }, [isSearching]);
+  
+    const handleClickNext = () => {
+      const currentPlaylist = playedFromAllSongs ? playlist : playlist.filter(song => favorites.includes(song.id));
+      if (currentPlaylist.length === 0) return;
+  
+      if (playedFromAllSongs) {
+        setCurrentSongIndex(prevIndex => (prevIndex + 1) % playlist.length);
+      } else {
+        const currentIndexInFavorites = currentPlaylist.findIndex(song => song.id === playlist[currentSongIndex].id);
+        const nextIndexInFavorites = (currentIndexInFavorites + 1) % currentPlaylist.length;
+        const nextSongId = currentPlaylist[nextIndexInFavorites].id;
+        const nextSongIndex = playlist.findIndex(song => song.id === nextSongId);
+        setCurrentSongIndex(nextSongIndex);
+      }
+      setIsPlaying(true);
+    };
+  
+    const handleClickPrevious = () => {
+      const currentPlaylist = playedFromAllSongs ? playlist : playlist.filter(song => favorites.includes(song.id));
+      if (currentPlaylist.length === 0) return;
+  
+      if (playedFromAllSongs) {
+        setCurrentSongIndex(prevIndex => (prevIndex - 1 + playlist.length) % playlist.length);
+      } else {
+        const currentIndexInFavorites = currentPlaylist.findIndex(song => song.id === playlist[currentSongIndex].id);
+        const prevIndexInFavorites = (currentIndexInFavorites - 1 + currentPlaylist.length) % currentPlaylist.length;
+        const prevSongId = currentPlaylist[prevIndexInFavorites].id;
+        const prevSongIndex = playlist.findIndex(song => song.id === prevSongId);
+        setCurrentSongIndex(prevSongIndex);
+      }
+      setIsPlaying(true);
+    };
+  
+    const handleSongClick = (index) => {
+      const actualIndex = playlist.findIndex(song => song.id === displayedPlaylist[index].id);
+      setCurrentSongIndex(actualIndex);
+      setIsPlaying(true);
+      setPlayedFromAllSongs(!showFavorites);
+      if (audioRef.current) {
+        audioRef.current.audio.current.play().catch(error => {
+          console.error('Failed to play the audio:', error);
+        });
+      }
+      setIsSearching(false);
+    };
+  
+    const handleSearchClick = () => {
+      setIsSearching(!isSearching);
+      setSearchQuery('');
+    };
+  
+    const handleSearchChange = (event) => {
+      setSearchQuery(event.target.value);
+    };
+  
+    const handleFavoriteClick = (song) => {
+      setFavorites((prevFavorites) =>
+        prevFavorites.includes(song.id)
+          ? prevFavorites.filter((id) => id !== song.id)
+          : [...prevFavorites, song.id]
+      );
+    };
+  
+    const filteredPlaylist = playlist.filter(song =>
+      song.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      song.artist.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+  
+    const displayedPlaylist = isSearching
+      ? (showFavorites
+        ? playlist.filter(song => favorites.includes(song.id)).filter(song =>
+            song.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+            song.artist.toLowerCase().includes(searchQuery.toLowerCase())
+          )
+        : filteredPlaylist)
+      : (showFavorites
+        ? playlist.filter(song => favorites.includes(song.id))
+        : playlist);
+  
+    return (
+      <div className='music-player'>
+        <div className='header'>
+          <h1 className='title'>Audioly</h1>
+          <div className='search-container'>
+            {isSearching ? (
+              <FaArrowLeft className='search-icon' onClick={handleSearchClick} />
+            ) : (
+              <FaSearch className='search-icon' onClick={handleSearchClick} />
+            )}
+            {isSearching && (
+              <input
+                type='text'
+                className='search-input'
+                placeholder='Search songs...'
+                value={searchQuery}
+                onChange={handleSearchChange}
+                ref={searchInputRef}
+              />
+            )}
+          </div>
+        </div>
+        {!isSearching && (
+          <div className='playlist-title'>
+            <span
+              className={`tab ${!showFavorites ? 'active' : ''}`}
+              onClick={() => setShowFavorites(false)}
+            >
+              All Songs
+            </span>
+            <span
+              className={`tab ${showFavorites ? 'active' : ''}`}
+              onClick={() => setShowFavorites(true)}
+            >
+              Favorite Songs
+            </span>
+          </div>
+        )}
+        {displayedPlaylist.length === 0 ? (
+          <div className='no-results'>
+            <FaMusic className='music-icon' />
+            <span>No songs found</span>
+          </div>
+        ) : (
+          <ul className='playlist'>
+            {displayedPlaylist.map((song, index) => (
+              <li
+                key={song.id}
+                className={`playlist-item ${playlist[currentSongIndex]?.id === song.id ? 'active' : ''}`}
+                onClick={() => handleSongClick(index)}
+              >
+                <div className='song-info'>
+                  <span className='song-name'>{song.name}</span>
+                  <span className='artist-name'>{song.artist}</span>
+                </div>
+                <FaHeart
+                  className={`favorite-icon ${favorites.includes(song.id) ? 'favorite' : ''}`}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    handleFavoriteClick(song);
+                  }}
+                />
+              </li>
+            ))}
+          </ul>
+        )}
+        <AudioPlayer
+          ref={audioRef}
+          className='custom-audio-player'
+          src={playlist[currentSongIndex]?.url}
+          onPlay={() => setIsPlaying(true)}
+          onPause={() => setIsPlaying(false)}
+          onEnded={handleClickNext}
+          onClickNext={handleClickNext}
+          onClickPrevious={handleClickPrevious}
+          showSkipControls
+          showJumpControls={false}
+        />
+          <div className='current-song'>
+            <p className='current-song-text'>
+              {isPlaying && (
+                <>Playing: {playlist[currentSongIndex]?.name} - {playlist[currentSongIndex]?.artist}</>
+              )}
+              {!isPlaying && (
+                <>Paused: {playlist[currentSongIndex]?.name} - {playlist[currentSongIndex]?.artist}</>
+              )}
+            </p>
+          </div>
+      </div>
     );
   };
-
-  const filteredPlaylist = playlist.filter(song =>
-    song.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    song.artist.toLowerCase().includes(searchQuery.toLowerCase())
-  );
-
-  const displayedPlaylist = isSearching
-    ? (showFavorites
-      ? playlist.filter(song => favorites.includes(song.id)).filter(song =>
-          song.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-          song.artist.toLowerCase().includes(searchQuery.toLowerCase())
-        )
-      : filteredPlaylist)
-    : (showFavorites
-      ? playlist.filter(song => favorites.includes(song.id))
-      : playlist);
-
-  return (
-    <div className='music-player'>
-      <div className='header'>
-        <h1 className='title'>Audioly</h1>
-        <div className='search-container'>
-          {isSearching ? (
-            <FaArrowLeft className='search-icon' onClick={handleSearchClick} />
-          ) : (
-            <FaSearch className='search-icon' onClick={handleSearchClick} />
-          )}
-          {isSearching && (
-            <input
-              type='text'
-              className='search-input'
-              placeholder='Search songs...'
-              value={searchQuery}
-              onChange={handleSearchChange}
-              ref={searchInputRef}
-            />
-          )}
-        </div>
-      </div>
-      {!isSearching && (
-        <div className='playlist-title'>
-          <span
-            className={`tab ${!showFavorites ? 'active' : ''}`}
-            onClick={() => setShowFavorites(false)}
-          >
-            All Songs
-          </span>
-          <span
-            className={`tab ${showFavorites ? 'active' : ''}`}
-            onClick={() => setShowFavorites(true)}
-          >
-            Favorite Songs
-          </span>
-        </div>
-      )}
-      {displayedPlaylist.length === 0 ? (
-        <div className='no-results'>
-          <FaMusic className='music-icon' />
-          <span>No songs found</span>
-        </div>
-      ) : (
-        <ul className='playlist'>
-          {displayedPlaylist.map((song, index) => (
-            <li
-              key={song.id}
-              className={`playlist-item ${playlist[currentSongIndex]?.id === song.id ? 'active' : ''}`}
-              onClick={() => handleSongClick(index)}
-            >
-              <div className='song-info'>
-                <span className='song-name'>{song.name}</span>
-                <span className='artist-name'>{song.artist}</span>
-              </div>
-              <FaHeart
-                className={`favorite-icon ${favorites.includes(song.id) ? 'favorite' : ''}`}
-                onClick={(e) => {
-                  e.stopPropagation();
-                  handleFavoriteClick(song);
-                }}
-              />
-            </li>
-          ))}
-        </ul>
-      )}
-      <AudioPlayer
-        ref={audioRef}
-        className='custom-audio-player'
-        src={playlist[currentSongIndex]?.url}
-        onPlay={() => setIsPlaying(true)}
-        onPause={() => setIsPlaying(false)}
-        onEnded={handleClickNext}
-        onClickNext={handleClickNext}
-        onClickPrevious={handleClickPrevious}
-        showSkipControls
-        showJumpControls={false}
-      />
-    </div>
-  );
-};
-
-export default MusicPlayer;
+  
+  export default MusicPlayer;
+  
