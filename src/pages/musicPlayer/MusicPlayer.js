@@ -227,7 +227,7 @@ const MusicPlayer = () => {
               {filteredPlaylist.length === 0 ? (
                 <div className='no-results'>
                   <FaMusic className='music-icon' />
-                  <p>No results found</p>
+                  <p>No Songs Found</p>
                 </div>
               ) : (
                 <ul className='playlist'>
@@ -257,7 +257,7 @@ const MusicPlayer = () => {
               {playlist.filter(song => favorites.includes(song.id)).length === 0 ? (
                 <div className='no-results'>
                   <FaMusic className='music-icon' />
-                  <p>No favorite songs found</p>
+                  <p>No Favorite Songs Found</p>
                 </div>
               ) : (
                 <ul className='playlist'>
