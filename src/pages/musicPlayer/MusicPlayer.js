@@ -87,7 +87,9 @@ const MusicPlayer = () => {
         const nextSongIndex = playlist.findIndex(song => song.id === nextSongId);
         setCurrentSongIndex(nextSongIndex);
       }
-      setIsPlaying(true);
+      if (isPlaying) {
+        setIsPlaying(true);
+      }
     };
   
     const handleClickPrevious = () => {
@@ -103,7 +105,9 @@ const MusicPlayer = () => {
         const prevSongIndex = playlist.findIndex(song => song.id === prevSongId);
         setCurrentSongIndex(prevSongIndex);
       }
-      setIsPlaying(true);
+      if (isPlaying) {
+        setIsPlaying(true);
+      }
     };
   
     const handleSongClick = (index) => {
@@ -297,6 +301,7 @@ const MusicPlayer = () => {
           onClickPrevious={handleClickPrevious}
           showSkipControls
           showJumpControls={false}
+          autoPlayAfterSrcChange={isPlaying}
         />
         <div className='current-song'>
           <p className='current-song-text'>
@@ -307,4 +312,4 @@ const MusicPlayer = () => {
     );
   };
   
-  export default MusicPlayer;
+export default MusicPlayer;
