@@ -224,14 +224,14 @@ const MusicPlayer = () => {
         <div className='sliding-content'>
           <div className='sliding-content-inner' style={{ transform: showFavorites ? 'translateX(-100%)' : 'translateX(0)' }}>
             <div className='sliding-section'>
-              {filteredPlaylist.length === 0 ? (
+              {displayedPlaylist.length === 0 ? (
                 <div className='no-results'>
                   <FaMusic className='music-icon' />
                   <p>No Songs Found</p>
                 </div>
               ) : (
                 <ul className='playlist'>
-                  {filteredPlaylist.map((song, index) => (
+                  {displayedPlaylist.map((song, index) => (
                     <li
                       key={song.id}
                       className={`playlist-item ${playlist[currentSongIndex]?.id === song.id ? 'active' : ''}`}
@@ -254,14 +254,14 @@ const MusicPlayer = () => {
               )}
             </div>
             <div className='sliding-section'>
-              {playlist.filter(song => favorites.includes(song.id)).length === 0 ? (
+              {displayedPlaylist.length === 0 ? (
                 <div className='no-results'>
                   <FaMusic className='music-icon' />
                   <p>No Favorite Songs Found</p>
                 </div>
               ) : (
                 <ul className='playlist'>
-                  {playlist.filter(song => favorites.includes(song.id)).map((song, index) => (
+                  {displayedPlaylist.map((song, index) => (
                     <li
                       key={song.id}
                       className={`playlist-item ${playlist[currentSongIndex]?.id === song.id ? 'active' : ''}`}
