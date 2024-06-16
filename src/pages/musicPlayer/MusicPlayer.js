@@ -109,13 +109,17 @@ const MusicPlayer = () => {
         setIsPlaying(true);
       }
     };
-  
+
     const handleSongClick = (index) => {
       const actualIndex = playlist.findIndex(song => song.id === displayedPlaylist[index].id);
-      setCurrentSongIndex(actualIndex);
-      setIsPlaying(true);
-      setPlayedFromAllSongs(!showFavorites);
-      if (audioRef.current) {
+      if (currentSongIndex === actualIndex && isPlaying) {
+        audioRef.current.audio.current.currentTime = 0;
+      } else {
+        setCurrentSongIndex(actualIndex);
+        setIsPlaying(true);
+        setPlayedFromAllSongs(!showFavorites);
+      }
+      if (audioRef.current && !isPlaying) {
         audioRef.current.audio.current.play().catch(error => {
           console.error('Failed to play the audio:', error);
         });
