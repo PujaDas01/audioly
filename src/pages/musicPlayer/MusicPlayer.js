@@ -160,6 +160,8 @@ const MusicPlayer = () => {
         ? playlist.filter(song => favorites.includes(song.id))
         : playlist);
   
+      const playlistHeight = isSearching ? 'calc(100vh - 251px)' : 'calc(100vh - 291px)';
+
     useEffect(() => {
       let touchstartX = 0;
       let touchendX = 0;
@@ -238,7 +240,7 @@ const MusicPlayer = () => {
                   <p>No Songs Found</p>
                 </div>
               ) : (
-                <ul className='playlist'>
+                <ul className='playlist' style={{ maxHeight: playlistHeight }}>
                   {displayedPlaylist.map((song, index) => (
                     <li
                       key={song.id}
@@ -268,7 +270,7 @@ const MusicPlayer = () => {
                   <p>{isSearching ? 'No Favorite Songs Found' : 'Add Songs'}</p>
                 </div>
               ) : (
-                <ul className='playlist'>
+                <ul className='playlist' style={{ maxHeight: playlistHeight }}>
                   {displayedPlaylist.map((song, index) => (
                     <li
                       key={song.id}
