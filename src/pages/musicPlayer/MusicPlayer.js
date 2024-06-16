@@ -257,7 +257,7 @@ const MusicPlayer = () => {
               {displayedPlaylist.length === 0 ? (
                 <div className='no-results'>
                   <FaMusic className='music-icon' />
-                  <p>No Favorite Songs Found</p>
+                  <p>{isSearching ? 'No Favorite Songs Found' : 'Add Songs'}</p>
                 </div>
               ) : (
                 <ul className='playlist'>
@@ -308,4 +308,3 @@ const MusicPlayer = () => {
   };
   
   export default MusicPlayer;
-  
