@@ -44,7 +44,7 @@ const MusicPlayer = () => {
     { id: 35, name: 'Who Am I to Stand in Your Way', artist: 'Chester See', url: './audio/Chester See - Who Am I to Stand in Your Way.mp3' },
   ];
   
-    const [playlist, setPlaylist] = useState(() => initialPlaylist.sort((a, b) => a.name.localeCompare(b.name)));
+    const playlist = initialPlaylist.sort((a, b) => a.name.localeCompare(b.name));
     const [currentSongIndex, setCurrentSongIndex] = useState(0);
     const [isPlaying, setIsPlaying] = useState(false);
     const [searchQuery, setSearchQuery] = useState('');
