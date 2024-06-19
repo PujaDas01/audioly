@@ -88,6 +88,7 @@ const MusicPlayer = () => {
     const audioRef = useRef(null);
     const searchInputRef = useRef(null);
     const [playedFromAllSongs, setPlayedFromAllSongs] = useState(true);
+    const [isPlayAfterSrcChange, setIsPlayAfterSrcChange] = useState(false);
   
     useEffect(() => {
       localStorage.setItem('favorites', JSON.stringify(favorites));
@@ -119,7 +120,9 @@ const MusicPlayer = () => {
         setCurrentSongIndex(nextSongIndex);
       }
       if (isPlaying) {
-        setIsPlaying(true);
+        setIsPlayAfterSrcChange(true);
+      } else {
+        setIsPlayAfterSrcChange(false);
       }
     };
   
@@ -137,8 +140,16 @@ const MusicPlayer = () => {
         setCurrentSongIndex(prevSongIndex);
       }
       if (isPlaying) {
-        setIsPlaying(true);
+        setIsPlayAfterSrcChange(true);
+      } else {
+        setIsPlayAfterSrcChange(false);
       }
+    };
+
+    const handleSongEnd = () => {
+      handleClickNext();
+      setIsPlaying(true)
+      setIsPlayAfterSrcChange(true);
     };
 
     const handleSongClick = (index) => {
@@ -333,12 +344,12 @@ const MusicPlayer = () => {
           src={playlist[currentSongIndex]?.url}
           onPlay={() => setIsPlaying(true)}
           onPause={() => setIsPlaying(false)}
-          onEnded={handleClickNext}
+          onEnded={handleSongEnd}
           onClickNext={handleClickNext}
           onClickPrevious={handleClickPrevious}
           showSkipControls
           showJumpControls={false}
-          autoPlayAfterSrcChange={isPlaying}
+          autoPlayAfterSrcChange={isPlayAfterSrcChange}
         />
         <div className='current-song'>
           <p className='current-song-text'>
