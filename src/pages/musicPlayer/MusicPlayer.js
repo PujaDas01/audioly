@@ -19,21 +19,21 @@ const MusicPlayer = () => {
     { id: 10, name: 'Nothing\'s Gonna Change My Love For You (Female Version)', artist: 'Shania Yan', url: './audio/Shania Yan - Nothing\'s Gonna Change My Love For You (Female Version).mp3' },
     { id: 11, name: 'Who Says', artist: 'Selena Gomez', url: './audio/Selena Gomez - Who Says.mp3' },
     { id: 12, name: 'Hold On', artist: 'Chord Overstreet', url: './audio/Chord Overstreet - Hold On.mp3' },
-    { id: 13, name: 'All of Me', artist: 'John Legend ', url: './audio/John Legend - All of Me.mp3' },
+    { id: 13, name: 'All Of Me', artist: 'John Legend ', url: './audio/John Legend - All of Me.mp3' },
     { id: 14, name: 'Baby', artist: 'Justin Bieber', url: './audio/Justin Bieber - Baby.mp3' },
-    { id: 15, name: 'Best of Me', artist: 'Neffex', url: './audio/Neffex - Best of Me.mp3' },
+    { id: 15, name: 'Best Of Me', artist: 'Neffex', url: './audio/Neffex - Best of Me.mp3' },
     { id: 16, name: 'Dandelions', artist: 'Ruth B.', url: './audio/Ruth B. - Dandelions.mp3' },
     { id: 17, name: 'Lovely', artist: 'Billie Eilish', url: './audio/Billie Eilish - Lovely.mp3' },
     { id: 18, name: 'Perfect', artist: 'Ed Sheeran', url: './audio/Ed Sheeran - Perfect.mp3' },
     { id: 19, name: 'Photograph', artist: 'Ed Sheeran', url: './audio/Ed Sheeran - Photograph.mp3' },
     { id: 20, name: 'Unstoppable', artist: 'Sia', url: './audio/Sia - Unstoppable.mp3' },
-    { id: 21, name: 'Thinking out Loud', artist: 'Ed Sheeran', url: './audio/Ed Sheeran - Thinking out Loud.mp3' },
+    { id: 21, name: 'Thinking Out Loud', artist: 'Ed Sheeran', url: './audio/Ed Sheeran - Thinking out Loud.mp3' },
     { id: 22, name: 'All I Want', artist: 'Alexandra Porat', url: './audio/All I Want - Kodaline cover by Alexandra Porat.mp3' },
     { id: 23, name: 'Not Your Barbie Girl', artist: 'Ava Max', url: './audio/Ava Max - Not Your Barbie Girl.mp3' },
     { id: 24, name: 'Love The Way You Lie 1, 2 & 3', artist: 'Eminem, Rihanna & Skylar Grey', url: './audio/Eminem, Rihanna & Skylar Grey - Love The Way You Lie 1, 2 & 3.mp3' },
     { id: 25, name: 'Happier x Perfect (Mashup)', artist: 'Ed Sheeran, Olivia Rodrigo', url: './audio/Happier x Perfect _ Ed Sheeran, Olivia Rodrigo (Mashup).mp3' },
     { id: 26, name: 'A Thousand Years', artist: 'Christina Perri', url: './audio/Christina Perri - A Thousand Years.mp3' },
-    { id: 27, name: 'I Belong to You', artist: 'Jacob Lee', url: './audio/I Belong to You - Jacob Lee.mp3' },
+    { id: 27, name: 'I Belong To You', artist: 'Jacob Lee', url: './audio/I Belong to You - Jacob Lee.mp3' },
     { id: 28, name: 'I Wanna Grow Old With You', artist: 'Westlife', url: './audio/I Wanna Grow Old With You - Westlife.mp3' },
     { id: 29, name: 'Love Story', artist: 'Taylor Swift', url: './audio/Love Story - Taylor Swift.mp3' },
     { id: 30, name: 'Happier', artist: 'Olivia Rodrigo', url: './audio/Olivia Rodrigo - Happier.mp3' },
@@ -41,7 +41,7 @@ const MusicPlayer = () => {
     { id: 32, name: 'See You Again', artist: 'Charlie Puth _ Christina Perri, Ellie Goulding', url: './audio/See You Again - Charlie Puth _ Christina Perri, Ellie Goulding (Mix).mp3' },
     { id: 33, name: 'Until I Found You', artist: 'Stephen Sanchez', url: './audio/Stephen Sanchez - Until I Found You.mp3' },
     { id: 34, name: 'My Heart Will Go On', artist: 'Celine Dion', url: './audio/Celine Dion - My Heart Will Go On.mp3' },
-    { id: 35, name: 'Who Am I to Stand in Your Way', artist: 'Chester See', url: './audio/Chester See - Who Am I to Stand in Your Way.mp3' },
+    { id: 35, name: 'Who Am I To Stand In Your Way', artist: 'Chester See', url: './audio/Chester See - Who Am I to Stand in Your Way.mp3' },
     { id: 36, name: 'Somebody\'s Me', artist: 'Enrique', url: './audio/Enrique - Somebody\'s Me.mp3' },
     { id: 37, name: 'Tell Me That You Love Me', artist: 'James Smith', url: './audio/James Smith - Tell Me That You Love Me.mp3' },
     { id: 38, name: 'You Broke Me First', artist: 'Tate McRae', url: './audio/Tate McRae - You Broke Me First.mp3' },
@@ -73,7 +73,8 @@ const MusicPlayer = () => {
     { id: 64, name: 'I\'ll Never Break Your Heart', artist: 'Backstreet Boys', url: './audio/Backstreet Boys - I\'ll Never Break Your Heart.mp3' },
     { id: 65, name: 'Everything I Wanted', artist: 'Billie Eilish', url: './audio/Billie Eilish - Everything I Wanted.mp3' },
     { id: 66, name: 'By My Side', artist: 'INXS', url: './audio/INXS - By My Side.mp3' },
-  ];
+    { id: 67, name: 'Night Changes', artist: 'One Direction', url: './audio/One Direction - Night Changes.mp3' },
+  ]
   
     const playlist = initialPlaylist.sort((a, b) => a.name.localeCompare(b.name));
     const [currentSongIndex, setCurrentSongIndex] = useState(0);
@@ -88,7 +89,6 @@ const MusicPlayer = () => {
     const audioRef = useRef(null);
     const searchInputRef = useRef(null);
     const [playedFromAllSongs, setPlayedFromAllSongs] = useState(true);
-    const [isPlayAfterSrcChange, setIsPlayAfterSrcChange] = useState(false);
   
     useEffect(() => {
       localStorage.setItem('favorites', JSON.stringify(favorites));
@@ -119,10 +119,9 @@ const MusicPlayer = () => {
         const nextSongIndex = playlist.findIndex(song => song.id === nextSongId);
         setCurrentSongIndex(nextSongIndex);
       }
+
       if (isPlaying) {
-        setIsPlayAfterSrcChange(true);
-      } else {
-        setIsPlayAfterSrcChange(false);
+        setIsPlaying(true);
       }
     };
   
@@ -139,18 +138,16 @@ const MusicPlayer = () => {
         const prevSongIndex = playlist.findIndex(song => song.id === prevSongId);
         setCurrentSongIndex(prevSongIndex);
       }
+
       if (isPlaying) {
-        setIsPlayAfterSrcChange(true);
-      } else {
-        setIsPlayAfterSrcChange(false);
+        setIsPlaying(true);
       }
     };
 
     const handleSongEnd = () => {
       handleClickNext();
-      setIsPlaying(true)
-      setIsPlayAfterSrcChange(true);
-    };
+      setIsPlaying(true);
+    }
 
     const handleSongClick = (index) => {
       const actualIndex = playlist.findIndex(song => song.id === displayedPlaylist[index].id);
@@ -349,7 +346,7 @@ const MusicPlayer = () => {
           onClickPrevious={handleClickPrevious}
           showSkipControls
           showJumpControls={false}
-          autoPlayAfterSrcChange={isPlayAfterSrcChange}
+          autoPlayAfterSrcChange={isPlaying}
         />
         <div className='current-song'>
           <p className='current-song-text'>
