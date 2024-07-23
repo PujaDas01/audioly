@@ -199,8 +199,6 @@ const MusicPlayer = () => {
         ? playlist.filter(song => favorites.includes(song.id))
         : playlist);
   
-      const playlistHeight = isSearching ? 'calc(100vh - 251px)' : 'calc(100vh - 291px)';
-
     useEffect(() => {
       let touchstartX = 0;
       let touchendX = 0;
@@ -242,20 +240,21 @@ const MusicPlayer = () => {
             ) : (
               <FaSearch className='search-icon' onClick={handleSearchClick} />
             )}
-            {isSearching && (
-              <input
-                type='text'
-                className='search-input'
-                placeholder='Search songs...'
-                value={searchQuery}
-                onChange={handleSearchChange}
-                ref={searchInputRef}
-              />
-            )}
           </div>
         </div>
-        {!isSearching && (
+        {isSearching ? (
           <div className='playlist-title'>
+            <input
+            type='text'
+            className='search-input'
+            placeholder='Search songs...'
+            value={searchQuery}
+            onChange={handleSearchChange}
+            ref={searchInputRef}
+          />
+        </div>
+        ):(
+            <div className='playlist-title'>
             <span
               className={`tab ${!showFavorites ? 'active' : ''}`}
               onClick={() => setShowFavorites(false)}
@@ -279,7 +278,7 @@ const MusicPlayer = () => {
                   <p>No Songs Found</p>
                 </div>
               ) : (
-                <ul className='playlist' style={{ maxHeight: playlistHeight }}>
+                <ul className='playlist'>
                   {displayedPlaylist.map((song, index) => (
                     <li
                       key={song.id}
@@ -304,12 +303,12 @@ const MusicPlayer = () => {
             </div>
             <div className='sliding-section'>
               {displayedPlaylist.length === 0 ? (
-                <div className='no-results'>
+                <div className='no-results playlist'>
                   <FaMusic className='music-icon' />
                   <p>{isSearching ? 'No Favorite Songs Found' : 'Add Songs'}</p>
                 </div>
               ) : (
-                <ul className='playlist' style={{ maxHeight: playlistHeight }}>
+                <ul className='playlist'>
                   {displayedPlaylist.map((song, index) => (
                     <li
                       key={song.id}
