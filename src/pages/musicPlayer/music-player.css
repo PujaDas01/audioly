@@ -141,7 +141,7 @@
  
  .sliding-content {
    position: relative;
-   max-height: 50vh;
+   height: 50vh;
    width: 100%;
    overflow: hidden;
    transition: transform 0.3s ease-in-out; 
@@ -295,6 +295,7 @@
   .music-player {
    width: 65vw;
   }
+  
   .title {
     font-size: 24px;
   }
@@ -332,6 +333,7 @@
   .music-icon {
     font-size: 6em;
   }
+
   .no-results p {
     font-size: 14px;
   }
@@ -339,11 +341,40 @@
 
  @media (max-width: 450px) {
   .music-player {
-   width: calc(100vw - 50px);
+    width: 100vw;
+    height: 100vh;
+    padding: 0;
+    border-radius: 0;
+    box-shadow: none;
+    border: none;
+  }
+
+  .search-input {
+    background-color: red;
+    margin: 0 6px;
+  }
+
+  .sliding-content {
+    overflow-y: auto;
+    height: 100vh;
+  }
+
+  .playlist {
+    height: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+
+  .no-results {
+    height: 60vh;
   }
 
   .song-name {
     font-size: 14px;
     width: 74vw;
+  }
+
+  .current-song {
+    box-shadow: none;
   }
 }

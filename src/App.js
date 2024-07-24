@@ -3,9 +3,7 @@ import MusicPlayer from './pages/musicPlayer/MusicPlayer';
 
 const App = () => {
   return(
-    <div>
-      <MusicPlayer/>
-    </div>
+    <MusicPlayer/>
   )
 }
 
