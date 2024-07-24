@@ -159,24 +159,6 @@
    flex-shrink: 0;
  }
  
- .no-results {
-   flex-grow: 1;
-   display: flex;
-   align-items: center;
-   flex-direction: column;
-   margin-top: 15%;
- }
- 
- .music-icon {
-   font-size: 8em;
-   color: #c8c4c4;
- }
- 
- .no-results p {
-   font-size: 1.2em;
-   color: #888;
- }
- 
  .playlist {
    height: 50vh;
    list-style: none;
@@ -228,12 +210,31 @@
  .playlist-item.active .artist-name {
    color: #f5f5f5;
  }
+
+.no-results {
+  flex-grow: 1;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.music-icon {
+  font-size: 8em;
+  color: #c8c4c4;
+}
+
+.no-results p {
+  font-size: 1.2em;
+  color: #888;
+}
  
  .song-info {
    display: flex;
    flex-direction: column;
    padding-left: 4px;
    text-align: left;
+   flex: 4;
  }
  
  .song-name {
@@ -242,6 +243,7 @@
    white-space: nowrap;
    overflow: hidden;
    text-overflow: ellipsis;
+   width: 48vw;
  }
  
  .artist-name {
@@ -251,12 +253,18 @@
    text-overflow: ellipsis;
  }
  
+ .favorite-icon-box {
+  flex: 1;
+  display: flex;
+ }
+
  .favorite-icon {
    margin-left: auto;
-   font-size: 16px;
+   font-size: 18px;
    color: #ccc;
    transition: color 0.3s;
    padding-right: 4px;
+
  }
  
  .favorite-icon.favorite {
@@ -301,6 +309,7 @@
 
   .song-name {
     font-size: 14px;
+    width: 56vw;
   }
 
   .artist-name {
@@ -308,21 +317,33 @@
   }
  
   .favorite-icon {
-    font-size: 14px;
+    font-size: 16px;
   }
 
   .tab {
-    padding: 10px 5px;
+    padding: 10px;
     font-size: 12px;
   }
 
   .tab.active::after {
     width: 80%;
   }
+
+  .music-icon {
+    font-size: 6em;
+  }
+  .no-results p {
+    font-size: 14px;
+  }
  }
 
  @media (max-width: 450px) {
   .music-player {
    width: calc(100vw - 50px);
+  }
+
+  .song-name {
+    font-size: 14px;
+    width: 74vw;
   }
 }

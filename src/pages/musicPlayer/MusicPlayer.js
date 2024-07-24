@@ -273,7 +273,7 @@ const MusicPlayer = () => {
           <div className='sliding-content-inner' style={{ transform: showFavorites ? 'translateX(-100%)' : 'translateX(0)' }}>
             <div className='sliding-section'>
               {displayedPlaylist.length === 0 ? (
-                <div className='no-results'>
+                <div className='no-results playlist'>
                   <FaMusic className='music-icon' />
                   <p>No Songs Found</p>
                 </div>
@@ -282,6 +282,7 @@ const MusicPlayer = () => {
                   {displayedPlaylist.map((song, index) => (
                     <li
                       key={song.id}
+                      title={song.name} 
                       className={`playlist-item ${playlist[currentSongIndex]?.id === song.id ? 'active' : ''}`}
                       onClick={() => handleSongClick(index)}
                     >
@@ -289,13 +290,15 @@ const MusicPlayer = () => {
                         <span className='song-name'>{song.name}</span>
                         <span className='artist-name'>{song.artist}</span>
                       </div>
-                      <FaHeart
-                        className={`favorite-icon ${favorites.includes(song.id) ? 'favorite' : ''}`}
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          handleFavoriteClick(song);
-                        }}
-                      />
+                      <div className='favorite-icon-box'>
+                        <FaHeart
+                          className={`favorite-icon ${favorites.includes(song.id) ? 'favorite' : ''}`}
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            handleFavoriteClick(song);
+                          }}
+                        />
+                      </div>
                     </li>
                   ))}
                 </ul>
@@ -319,13 +322,15 @@ const MusicPlayer = () => {
                         <span className='song-name'>{song.name}</span>
                         <span className='artist-name'>{song.artist}</span>
                       </div>
-                      <FaHeart
-                        className={`favorite-icon ${favorites.includes(song.id) ? 'favorite' : ''}`}
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          handleFavoriteClick(song);
-                        }}
-                      />
+                      <div className='favorite-icon-box'>
+                        <FaHeart
+                          className={`favorite-icon ${favorites.includes(song.id) ? 'favorite' : ''}`}
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            handleFavoriteClick(song);
+                          }}
+                        />
+                      </div>
                     </li>
                   ))}
                 </ul>
