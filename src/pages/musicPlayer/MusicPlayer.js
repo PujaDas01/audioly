@@ -42,7 +42,7 @@ const MusicPlayer = () => {
     { id: 33, name: 'Until I Found You', artist: 'Stephen Sanchez', url: './audio/Stephen Sanchez - Until I Found You.mp3' },
     { id: 34, name: 'My Heart Will Go On', artist: 'Celine Dion', url: './audio/Celine Dion - My Heart Will Go On.mp3' },
     { id: 35, name: 'Who Am I To Stand In Your Way', artist: 'Chester See', url: './audio/Chester See - Who Am I to Stand in Your Way.mp3' },
-    { id: 36, name: 'Somebody\'s Me', artist: 'Enrique', url: './audio/Enrique - Somebody\'s Me.mp3' },
+    { id: 36, name: 'Somebody\'s Me', artist: 'Enrique Iglesias', url: './audio/Enrique - Somebody\'s Me.mp3' },
     { id: 37, name: 'Tell Me That You Love Me', artist: 'James Smith', url: './audio/James Smith - Tell Me That You Love Me.mp3' },
     { id: 38, name: 'You Broke Me First', artist: 'Tate McRae', url: './audio/Tate McRae - You Broke Me First.mp3' },
     { id: 39, name: 'Cheap Thrills', artist: 'Sia', url: './audio/Sia - Cheap Thrills.mp3' },
@@ -53,7 +53,7 @@ const MusicPlayer = () => {
     { id: 44, name: 'Despacito', artist: 'Justin Bieber', url: './audio/Justin Bieber - Despacito.mp3' },
     { id: 45, name: 'Just Missing You', artist: 'Emma Heesters', url: './audio/Emma Heesters - Just Missing You.mp3' },
     { id: 46, name: 'Hero', artist: 'Enrique Iglesias', url: './audio/Enrique Iglesias - Hero.mp3' },
-    { id: 47, name: 'Bruises', artist: 'Lewis Capaldi', url: './audio/Lewis Capaldi - Bruises.mp3' },
+    { id: 47, name: 'Tu Hai Toh', artist: 'Bunny & Sagar', url: './audio/Tu Hai Toh - Bunny & Sagar.mp3' },
     { id: 48, name: 'Heartbreak Anniversary', artist: 'Giveon', url: './audio/Giveon - Heartbreak Anniversary.mp3' },
     { id: 49, name: 'You Look So Broken When You Cry', artist: 'Glass Animals', url: './audio/Glass Animals - You Look So Broken When You Cry.mp3' },
     { id: 50, name: 'Why Not Me', artist: 'Enrique Iglesias', url: './audio/Enrique Iglesias - Why Not Me.mp3' },
@@ -74,6 +74,11 @@ const MusicPlayer = () => {
     { id: 65, name: 'Everything I Wanted', artist: 'Billie Eilish', url: './audio/Billie Eilish - Everything I Wanted.mp3' },
     { id: 66, name: 'By My Side', artist: 'INXS', url: './audio/INXS - By My Side.mp3' },
     { id: 67, name: 'Night Changes', artist: 'One Direction', url: './audio/One Direction - Night Changes.mp3' },
+    { id: 68, name: 'Kabhi Yaadon Mein Aaoon', artist: 'Arijit Singh & Palak Muchhal', url: './audio/Kabhi Yaadon Mein Aaoon - Arijit Singh & Palak Muchhal.mp3' },
+    { id: 69, name: 'Say You Won\'t Let Go', artist: 'James Arthur', url: './audio/Say You Won\'t Let Go - James Arthur.mp3' },
+    { id: 70, name: 'No Promises', artist: 'Shayne Ward', url: './audio/Shayne Ward - No Promises.mp3' },
+    { id: 71, name: 'Sorry Blame It On Me', artist: 'Akon', url: './audio/Sorry Blame It On Me - Akon.mp3' },
+    { id: 72, name: 'Right Now Na Na Na', artist: 'Akon', url: './audio/Akon - Right Now Na Na Na.mp3' },
   ]
   
     const playlist = initialPlaylist.sort((a, b) => a.name.localeCompare(b.name));
