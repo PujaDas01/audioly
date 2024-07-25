@@ -318,7 +318,7 @@
 
   .song-name {
     width: 56vw;
-    letter-spacing: 0.4px;
+    letter-spacing: 0.2px;
   }
 
   .artist-name {
@@ -336,7 +336,8 @@
     padding: 12px;
     padding-left: 18px;
     font-size: 15px;
-    letter-spacing: 0.4px;
+    letter-spacing: 0.2px;
+    font-weight: 800;
   }
 
   .tab.active::after {
