@@ -337,7 +337,7 @@
     padding-left: 18px;
     font-size: 15px;
     letter-spacing: 0.2px;
-    font-weight: 800;
+    font-weight: 700;
   }
 
   .tab.active::after {
@@ -354,9 +354,13 @@
  }
 
  @media (max-width: 450px) {
+  body {
+    display: block;
+  }
+  
   .music-player {
     width: 100vw;
-    height: 100svh;
+    height: 100dvh;
     padding: 0;
     border-radius: 0;
     box-shadow: none;
@@ -366,6 +370,10 @@
   .header {
     margin-left: 8px;
     margin-right: 12px;
+  }
+
+  .tab {
+    font-weight: 800;
   }
 
   .search-input {
@@ -386,6 +394,7 @@
 
   .no-results {
     height: 60vh;
+    border-bottom: none;
   }
 
   .song-name {
