@@ -238,7 +238,7 @@ const MusicPlayer = () => {
     return (
       <div className='music-player'>
         <div className='header'>
-          <h1 className='title'>Audioly</h1>
+          <h1 className='title'>Vibes</h1>
           <div className='search-container'>
             {isSearching ? (
               <FaArrowLeft className='search-icon' onClick={handleSearchClick} />
