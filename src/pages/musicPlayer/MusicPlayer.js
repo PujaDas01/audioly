@@ -79,6 +79,7 @@ const MusicPlayer = () => {
     { id: 70, name: 'No Promises', artist: 'Shayne Ward', url: './audio/Shayne Ward - No Promises.mp3' },
     { id: 71, name: 'Sorry Blame It On Me', artist: 'Akon', url: './audio/Sorry Blame It On Me - Akon.mp3' },
     { id: 72, name: 'Right Now Na Na Na', artist: 'Akon', url: './audio/Akon - Right Now Na Na Na.mp3' },
+    { id: 73, name: 'Lightning', artist: 'Henry Gallagher', url: './audio/Henry Gallagher - Lightning.mp3' },
   ]
   
     const playlist = initialPlaylist.sort((a, b) => a.name.localeCompare(b.name));
