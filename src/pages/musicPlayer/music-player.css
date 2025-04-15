@@ -313,6 +313,12 @@
 
   .playlist-item:hover {
     background-color: transparent;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .playlist-item.active {
+    background-color: #b2dfdb;
+    border-radius: 2px;
   }
 
   .song-info {
